@@ -46,7 +46,7 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-12 col-md-6 mx-auto" id="cardlist">
+        <div class="col-md-4 col-lg-6 mx-auto" id="cardlist">
           <!-- <div class="card">
                   <img src="..." class="card-img-top" alt="...">
                   <div class="card-body">
@@ -61,6 +61,7 @@
 
     <script>
       const cardlist = document.getElementById("cardlist");
+      console.log(cardlist);
       async function fetchAmazon() {
         const response = await fetch(
           "https://striveschool-api.herokuapp.com/api/product/",
@@ -72,7 +73,6 @@
           }
         );
         const data = await response.json();
-        return data;
         cardlist.innerHTML = data.map(
           (product) => `
               <div class="card">
@@ -83,6 +83,7 @@
                         <p class="card-text">${product.price}</p>      
            `
         );
+        return data;
       }
       console.log(fetchAmazon());
     </script>

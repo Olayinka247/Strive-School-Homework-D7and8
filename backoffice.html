@@ -54,15 +54,47 @@
                     <input class="form-control" type="text" placeholder="Name">
                     <input class="form-control" type="text" placeholder="Description">
                     <input class="form-control" type="text" placeholder="brand">
+                    <input class="form-control" type="text" placeholder="imageUrl">
                     <input class="form-control" type="number" placeholder="Price">
-                
-
+        
                     <button type="submit" class="btn btn-primary btn-block mt-3 mx-auto">Add event</button>
                 </form>
 
             </div>
 
-    <script></script>
+    <script>
+      async function handleSubmit(event) {
+        event.preventDefault()
+        // to select all the input on the page 
+       let [name, description, brand, imageUrl, price] = document.querySelectorAll("input")
+        
+       let body = {
+           name : name.value,
+           description : description.value,
+           brand : brand.value,
+           imageUrl : imageUrl.value,
+           price : price.value
+       }
+        let data = JSON.stringify (body)
+        const response = await fetch("https://striveschool-api.herokuapp.com/api/product/",{
+            method: "POST",
+            headers: { 
+                "Content-Type": "application/json",
+              "Authorization":
+                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgxN2M1ZWU3ODE4NzAwMTVjMjY3YTgiLCJpYXQiOjE2NDY4MzQyOTMsImV4cCI6MTY0ODA0Mzg5M30.H-e00dHFHmLI1WnGxWOmQjxY4nDtR_CO60_cO86dh5c",
+            },
+            body:data
+          })
+          if ( response.ok){
+            alert("success")
+            let lastData = await response.json()
+            console.log(lastData);
+
+        }
+      }
+      
+
+    </script>
 
     <script
       src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
